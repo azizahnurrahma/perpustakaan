@@ -10,7 +10,7 @@ class BukuController extends Controller
 {
     // fungsi buat ngeliat semua daftar buku
     public function index(){
-        $semuaBuku = Buku::all();
+        $semuaBuku = Buku::with('kategori')->get();
         // Cek apakah variabel $semuaBuku isinya kosong
         if ($semuaBuku->isEmpty()) {
             return response()->json([
@@ -28,6 +28,7 @@ class BukuController extends Controller
     // fungsi buat nambah buku baru
     public function store(Request $request){
         $bukuBaru = Buku::create([
+            'kategori_id' => $request->kategori_id,
             'judul' => $request->judul,
             'penulis' => $request->penulis,
             'deskripsi' => $request->deskripsi,
@@ -65,7 +66,7 @@ class BukuController extends Controller
         $buku = Buku::find($id);
 
         if (!$buku){
-            return response()->json(['pesan' => 'Gagal menghapus! Buku tidak ditemukan :) ']);
+            return response()->json(['pesan' => 'Gagal menghapus! Buku tidak ditemukan :) '], 404);
         }
         $buku->delete();
         return response()->json([

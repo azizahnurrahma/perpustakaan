@@ -13,5 +13,9 @@ class Buku extends Model
     protected $table = 'buku';
 
     // kolom yang boleh diisi
-    protected $fillable = ['judul', 'penulis', 'deskripsi', 'stok'];
+    protected $fillable = ['kategori_id', 'judul', 'penulis', 'deskripsi', 'stok'];
+
+    public function kategori() {
+    return $this->belongsTo(Kategori::class);
+}
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BukuController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\KategoriController;
 use Symfony\Component\Routing\Route as RoutingRoute;
 
 // Jalur untuk Daftar Akun
@@ -17,3 +18,7 @@ Route::post('/buku', [BukuController::class, 'store']); //untuk tambah buku baru
     // jalur edit (pake put) dan hapus (pake delete)
     Route::post('/buku/update/{id}', [BukuController::class, 'update']);
     Route::delete('/buku/{id}', [BukuController::class, 'destroy']);
+
+// Route untuk Kategori
+Route::get('/kategori', [KategoriController::class, 'index']);
+Route::post('/kategori', [KategoriController::class, 'store']);

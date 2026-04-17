@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('buku', function (Blueprint $table) {
+        Schema::create('kategoris', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kategori_id')->constrained('kategoris')->onDelete('cascade');
-            $table->string('judul');  //judul buku
-            $table->string('penulis');  //nama penulis
-            $table->text('deskripsi');  //deskripsi buku
-            $table->integer('stok');   //jumlah stok buku
+            $table->string('nama_kategori'); // Contoh: Novel, Sains, Religi
             $table->timestamps();
         });
     }
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('book');
+        Schema::dropIfExists('kategoris');
     }
 };
