@@ -26,7 +26,16 @@ class BukuController extends Controller
     }
 
     // fungsi buat nambah buku baru
-    public function store(Request $request){
+    public function store(Request $request)
+    {
+        // PAGAR: Cek apakah yang login beneran Admin
+        if ($request->user()->role !== 'admin') {
+            return response()->json([
+                'pesan' => 'Akses ditolak! Kamu bukan Admin.'
+            ], 403);
+        }
+
+        // Kalau lolos pagar, baru simpan
         $bukuBaru = Buku::create([
             'kategori_id' => $request->kategori_id,
             'judul' => $request->judul,
@@ -38,7 +47,7 @@ class BukuController extends Controller
         return response()->json([
             'pesan' => 'Buku berhasil ditambahkan',
             'data' => $bukuBaru
-        ],201);
+        ], 201);
     }
 
     // fungsi untuk mengedit data buku

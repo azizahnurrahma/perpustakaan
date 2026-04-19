@@ -18,7 +18,10 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            
+            $table->enum('role', ['admin', 'mahasiswa'])->default('mahasiswa');
+            $table->string('nim')->unique()->nullable(); // nullable karena Admin gak punya NIM
+            $table->string('jurusan')->nullable();       // nullable karena Admin gak punya Jurusan
+            $table->string('no_telp')->nullable();      // nullable biar fleksibel
             $table->timestamps();
         });
 
